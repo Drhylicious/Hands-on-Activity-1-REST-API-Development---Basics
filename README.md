@@ -21,3 +21,11 @@
 **4. Testing:**
 - (Paste a screenshot of a successful GET request here)
 ![Get Request](image.png)
+
+Why did I choose to Embed the [Review/Tag/Log]?
+
+ - **Embed:** Reviews are typically small, frequently-read records tied to a single parent (`Dish`). Embedding reviews inside the `Dish` document keeps related data together, simplifies reads (no additional queries), and is efficient for use cases where reviews are only accessed in the context of their dish.
+
+Why did I choose to Reference the [Chef/User/Guest]?
+
+ - **Reference:** Chefs are standalone entities that can be associated with many dishes. Referencing `Chef` from a `Dish` by ObjectId avoids duplication, keeps the chef data normalized, and allows updating chef details in one place without touching all related dishes. It also keeps the Dish document compact while enabling populated joins when needed.

@@ -9,10 +9,21 @@ const {
     deleteDish,
 } = require('../controllers/dishController');
 
+const {
+    createChef,
+    getAllChefs,
+    getChefById,
+} = require('../controllers/chefController');
+
 router.get('/dishes', getAllDishes);
 router.post('/dishes', createDish);
 router.get('/dishes/:id', getDishById);
 router.put('/dishes/:id', updateDish);
 router.delete('/dishes/:id', deleteDish);
+
+// Chef routes (reference relationship testing)
+router.post('/chefs', createChef);
+router.get('/chefs', getAllChefs);
+router.get('/chefs/:id', getChefById);
 
 module.exports = router;
