@@ -107,3 +107,49 @@ Mocking allows us to isolate the unit of code being tested by replacing dependen
 We use `jest.fn()` to create a mock function for `next` so we can track if and how it was called. In middleware tests, this helps us verify that the middleware either passes control to the next handler (when authorized) or stops the request (when unauthorized). Checking that `next` was not called confirms the middleware correctly blocked unauthorized access.
 
 ---
+
+## Hands-on Activity-6_Integration_Testing
+
+### Integration Test Documentation
+
+$ npm test
+
+> salangsang-api-activity@1.0.0 test
+> cross-env NODE_ENV=test jest --detectOpenHandles
+
+ PASS  tests/api.integration.test.js
+  ● Console
+                                                                                      
+    console.log
+      [dotenv@17.2.3] injecting env (3) from .env -- tip: 🔑 add access controls to secrets: https://dotenvx.com/ops
+
+      at _log (C:\Users\tampu\OneDrive\Desktop\04-Securing API (2)../../../../../../04-Securing API/node_modules/dotenv/lib/main.js:142:11)
+
+ PASS  tests/authMiddleware.test.js
+ PASS  tests/dishController.test.js
+                                                                                                     
+Test Suites: 3 passed, 3 total                                                                       
+Tests:       7 passed, 7 total
+Snapshots:   0 total
+Time:        1.991 s, estimated 4 s
+Ran all test suites.
+
+---
+
+## README.md Essay Questions (Integration Testing)
+
+### 1. Unit vs. Integration
+**Explain the difference between Unit Test (Activity 5) and Integration Test. What does Integration Testing check that Unit Testing does not?**
+
+Unit tests check individual functions or modules in isolation, often using mocks for dependencies. Integration tests check how different parts of the application (routes, controllers, models, and database) work together as a whole. Integration Testing ensures that the components interact correctly and data flows as expected, which unit tests alone cannot guarantee.
+
+### 2. In-Memory Databases
+**Why did we use mongodb-memory-server instead of connecting to MongoDB Atlas? Give at least two reasons.**
+
+1. It prevents test data from polluting the real database, keeping production data safe.
+2. It makes tests faster and more reliable, since the database is local and reset for each test run, and does not depend on internet or Atlas availability.
+
+### 3. Supertest
+**What is the role of Supertest? Why didn’t we use Postman?**
+
+Supertest allows us to automate HTTP requests and assertions directly in code, making tests repeatable and part of CI/CD pipelines. Postman is a manual tool for API testing, but cannot be used for automated, repeatable integration tests in code.
